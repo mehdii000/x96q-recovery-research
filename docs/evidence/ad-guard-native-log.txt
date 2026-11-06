@@ -1,0 +1,25 @@
+# ReRouteAdGuard logcat lines only, extracted from private device logs (2026-11-06, device local time).
+# PID 4928: corrected loader during guest onboarding (hooks attached; no player source copied yet). PID 5255: diagnostic build (logs large copies; one candidate source saved to app cache, later deleted).
+# PIDs 5444/5876: clean release build, two cold starts. PID 3143: release build after a real reboot, launched from Arabic Home.
+# Offsets are relative to the libcobalt.so load base; 0x814a6c is the pinned source-copy call site.
+11-06 21:01:41.677  4928  4928 I ReRouteAdGuard: Watching source boundary with 6 native imports
+11-06 21:07:25.058  5255  5255 I ReRouteAdGuard: Watching source boundary with 6 native imports
+11-06 21:07:26.330  5255  5353 I ReRouteAdGuard: Copy size=1013658 caller offset=814a6c
+11-06 21:07:26.333  5255  5353 I ReRouteAdGuard: Copy size=1013658 caller offset=ae924c
+11-06 21:07:29.107  5255  5353 I ReRouteAdGuard: Copy size=1009301 caller offset=e2f58
+11-06 21:07:29.398  5255  5353 I ReRouteAdGuard: Copy size=1045406 caller offset=e2f58
+11-06 21:07:29.527  5255  5353 I ReRouteAdGuard: Copy size=1357560 caller offset=814a6c
+11-06 21:07:30.496  5255  5353 I ReRouteAdGuard: Copy size=2093447 caller offset=e2f58
+11-06 21:07:30.528  5255  5353 I ReRouteAdGuard: Captured diagnostic player source 2093447/2093447 bytes
+11-06 21:07:30.531  5255  5353 I ReRouteAdGuard: Copy size=2272858 caller offset=814a6c
+11-06 21:07:30.601  5255  5353 I ReRouteAdGuard: Applied pinned video-ad loader early return
+11-06 21:07:30.601  5255  5353 I ReRouteAdGuard: Restored all 6 native imports
+11-06 21:09:23.703  5444  5444 I ReRouteAdGuard: Watching source boundary with 6 native imports
+11-06 21:09:28.271  5444  5542 I ReRouteAdGuard: Applied pinned video-ad loader early return
+11-06 21:09:28.271  5444  5542 I ReRouteAdGuard: Restored all 6 native imports
+11-06 21:12:25.821  5876  5876 I ReRouteAdGuard: Watching source boundary with 6 native imports
+11-06 21:12:29.941  5876  5969 I ReRouteAdGuard: Applied pinned video-ad loader early return
+11-06 21:12:29.941  5876  5969 I ReRouteAdGuard: Restored all 6 native imports
+11-06 21:28:07.291  3143  3143 I ReRouteAdGuard: Watching source boundary with 6 native imports
+11-06 21:28:17.462  3143  3237 I ReRouteAdGuard: Applied pinned video-ad loader early return
+11-06 21:28:17.462  3143  3237 I ReRouteAdGuard: Restored all 6 native imports

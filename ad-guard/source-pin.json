@@ -1,0 +1,23 @@
+{
+  "original_sha256": "c135f6c246b9bd462368e3735b01a1f6b35e485d30372d6035325fadcc52afff",
+  "same_length_sha256": "bdacc50a7ee9c0d34abf562d34901360fef3712ad8e84a6f0435f67782c0c3f8",
+  "ad_constructor": "u2a",
+  "registration": "m6(\"ad\",u2a)",
+  "wrapper": "load(){this.G()}",
+  "loader": "G",
+  "loader_range": [
+    2011230,
+    2011924
+  ],
+  "bookkeeping": "super.load();",
+  "memory_patch": {
+    "offset": 2011247,
+    "original": "var a=i9(this.j).rf;",
+    "replacement": "return;             ",
+    "prefix": "G(){super.load();var a=i9(this.j).rf;",
+    "prefix_patch_offset": 17
+  },
+  "source": "Player JavaScript copied by the Cobalt engine inside YouTube for Android TV 2.07.02 on the X96Q (2026-11-06). The source itself is not redistributed.",
+  "source_length": 2272858,
+  "note": "original_sha256 pins the exact input. same_length_sha256 is the digest expected after the same-length replacement in memory_patch; the 2026-11-06 device trial delivered exactly this output. An earlier 7-byte insertion variant from prototyping is not used."
+}

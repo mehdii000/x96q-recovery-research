@@ -1,0 +1,12 @@
+build/
+private/
+out/
+__pycache__/
+*.apk
+*.idsig
+*.jks
+*.keystore
+*.p12
+*.pass
+*.so
+*.js
