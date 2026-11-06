@@ -111,7 +111,9 @@ A separate AI-agent review was started but **not completed**: the reviewer hit a
 1. **Partial-hook bookkeeping.** Import slots are now collected before any mutation, and rollback includes the slot that was being written when a failure happened. The protection-failure regression tests failed before the fix and pass after it.
 2. **`dlsym(NULL, …)` on 32-bit Android.** `memcpy` and `memmove` are now resolved through an explicit `dlopen("libc.so")` handle.
 
-The author then reviewed the rest: ARM wrapper and call-site ABI, dynamic imports, source pin, slot rollback, native logs, and the package change manifest. **There is no complete independent sign-off.** Treat this as research code.
+The implementing Codex session then checked the rest: ARM wrapper and call-site ABI, dynamic imports, source pin, slot rollback, native logs, and the package change manifest. That is self-review by the agent that wrote the code, not an independent review. **There is no complete independent sign-off, human or AI.** Treat this as research code.
+
+Testing gaps: the relocation walk and wrappers in `loader.c` have no host test; concurrent copies from the pinned call site were not exercised; and sustained `mprotect` failure during restoration was not injected on a device. The implementing agent inspected this code, but that self-review does not establish those behaviours.
 
 ## Limits, plainly
 

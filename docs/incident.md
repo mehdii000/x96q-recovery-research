@@ -18,7 +18,22 @@ Build properties report Android 10, security patch 2019-12-05, `userdebug`/`test
 
 ### 2. Installed Katana botnet payloads (confirmed, high)
 
-`com.system.update` was installed and running several native `libupdate.so` processes. Its APK (SHA-256 `4c480c6c8699218b3ee046159069f35aff9b441ba56134ef8627e29489e8d1fe`) differs from the published wrapper. However, **all ten embedded executable assets match hashes in Nokia Deepfield's Katana indicator set**: ARM/x86 bot payloads, rootkit-related compiler and loader assets, and TinyCC components ([indicators](https://github.com/deepfield/public-research/blob/main/katana/iocs/hashes.csv), [report](https://github.com/deepfield/public-research/blob/main/katana/report.md)).
+`com.system.update` was installed and running several native `libupdate.so` processes. Its APK (SHA-256 `4c480c6c8699218b3ee046159069f35aff9b441ba56134ef8627e29489e8d1fe`, 1,102,731 bytes) differs from the published wrapper (`aaaa8948…3e96`, 1,102,717 bytes). However, **all ten embedded executable assets match hashes in Nokia Deepfield's Katana indicator set**: ARM/x86 bot payloads, rootkit-related compiler and loader assets, and TinyCC components ([indicators](https://github.com/deepfield/public-research/blob/main/katana/iocs/hashes.csv), [report](https://github.com/deepfield/public-research/blob/main/katana/report.md)).
+
+| APK entry | SHA-256 (also in Deepfield's list) | Deepfield description |
+|---|---|---|
+| `assets/arm5` | `eb875810f18f42781f2958a038713156194842b5b54e9e9f57f782bd3a33b2ab` | Katana bot binary |
+| `assets/arm7` | `16e3ac66f85aa3dc0f49bd6df44ae29e7512fc7e293f8e2c24bc11dcfa249a78` | Katana bot binary (debug symbols) |
+| `assets/arm64` | `cf173c982a341d2b14c6b024807836016a40e22ab0b6596591d98e841c24be62` | Katana bot binary |
+| `assets/x86_32` | `87ec57bd8e639d5f96a17dfb73af5cc63cc528f45d4a3231e70f287e9ad38601` | Katana bot binary |
+| `assets/x86_64` | `6cc3fc0284dfe57881f5ea01dcd3cecb6c667dc8d1147b049c3d6bd661d9c906` | Katana bot binary |
+| `assets/rkcompiler` | `121f7a1da6b5d74209a64dfaa42f56d5ce7c52181f49fb256f8bdbdf7c00222f` | Rootkit compiler |
+| `assets/rkloader_arm5` | `8c9ff5d82f986b9c86ff8d1a26f83a9c41e50a5f0671e2b79e13c663afb1ba20` | Rootkit loader |
+| `assets/rkloader_arm7` | `b24c9255bf3c8dc65f35d61544e1959354b74c46d4e1c99462f2f4292ee62cda` | Rootkit loader |
+| `assets/tcc_arm5` | `2ab6cb64f05f18b482ace03e7f41617f28bfdb8e54da7070bc183a661f104e56` | TinyCC compiler |
+| `assets/tcc_arm7` | `809d433de87e5435b185ea908ea244cc5a070cbad23bc11c53dd214528d9bbce` | TinyCC compiler |
+
+These ten hashes were re-derived from the preserved APK on 2026-11-06 by reading ZIP entries in memory (no extraction or execution), then compared with the current Deepfield CSV. A reader can check the second half of that comparison against the public list. That the hashed APK came from this box rests on the private collection record.
 
 The APK's DEX strings also contain uninstall-defence and firmware/system persistence routines. These are static capabilities. Neither successful privilege escalation nor a loaded kernel rootkit was demonstrated. A live socket from that package's UID to a remote TCP 6969 endpoint was observed. That is consistent with the campaign's reported protocol, but it is not an exact match to a published IP. The investigator never contacted the remote endpoint.
 
@@ -35,7 +50,7 @@ These are device-reported historical totals, not real-time per-process rates, an
 
 ### 4. Aisuru-consistent executable (high-confidence family association)
 
-`com.android.ota.helper.sync` shipped `libotahelp.so`, which is actually a stripped ARM executable, and several processes with that name were running. The preserved 117,212-byte copy has SHA-256 `610a27ada243e9eab53061065f569b1c58b35c823f77d87b9c12be281095ed79`. Ghidra found the string `PJbiNbbeasddDfsc` at `0x236a4`, which is exactly the generation-two key documented in [Nokia Deepfield's Aisuru research](https://github.com/deepfield/public-research/blob/main/aisuru/README.md). Full decompilation was not completed, so this is a strong family association, not a full attribution.
+`com.android.ota.helper.sync` shipped `libotahelp.so`, which is actually a stripped ARM executable, and several processes with that name were running. The preserved 117,212-byte copy has SHA-256 `610a27ada243e9eab53061065f569b1c58b35c823f77d87b9c12be281095ed79`. Ghidra found the string `PJbiNbbeasddDfsc` at virtual address `0x236a4` (file offset `0x1b6a4`), which is exactly the generation-two key documented in [Nokia Deepfield's Aisuru research](https://github.com/deepfield/public-research/blob/main/aisuru/README.md). Full decompilation was not completed, so this is a strong family association, not a full attribution.
 
 ### 5. Follow-up: reserve-partition remnants (2026-11-06)
 

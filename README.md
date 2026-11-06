@@ -35,7 +35,7 @@ Start with [research method and evidence](docs/research-method.md) for the hypot
 - **Cleanup:** malware and suspicious loaders were removed, 48 preinstalled apps disabled, the vendor device owner released, a persistent remote-care service removed for user 0, and the clock fixed. Real reboots confirmed that each change held.
 - **Package controls:** Play Store, two vendor app stores and two vendor OTA updaters are disabled, and the changes survived reboot. The original YouTube is disabled but kept for rollback.
 - **Ad guard:** a 9,328-byte shim patches one 20-byte statement in one pinned player version and then restores all six native imports. On the same documentary, the original app showed a Ferrero Rocher pre-roll and the patched app showed no video ad in 32 sampled seconds. That is one comparison on one device, not a guarantee.
-- **Reproducible:** the published sources rebuild the deployed shim byte-for-byte, and the launcher's DEX matches the deployed one.
+- **Reproducible, with private inputs:** given the pinned YouTube APK and the same device link libraries (neither distributed), the published sources rebuild the deployed shim byte-for-byte. The launcher's DEX matches the deployed one; the signed APKs are not claimed to be reproducible. Without those inputs, a reader can run the host tests and check the Katana hashes in [incident.md](docs/incident.md#2-installed-katana-botnet-payloads-confirmed-high) against Deepfield's public list.
 
 ## What this does *not* show
 
